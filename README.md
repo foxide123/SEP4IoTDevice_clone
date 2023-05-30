@@ -1,52 +1,33 @@
-# Terra-Sense
+[![Coverage Status](https://coveralls.io/repos/github/GluhaiaMuha/SEP4IoTDevice/badge.svg?branch=refs/heads/project_test_setup)](https://coveralls.io/github/GluhaiaMuha/SEP4IoTDevice?branch=refs/heads/project_test_setup)
 
-## SEP4 - IoT Project
+# Setting up the project
+In order to run the tests make sure you have installed:
+- PlatformIO extension
+- CMake extension
 
-Team project for Semester 4 SEP. IoT Device responsible for handling temperature, CO2, humidity as well as a servo,
-for a terrarium.
+## Step-by-step
 
-## Features
+!!! If you open src files outside of platformio project there will be many include errors.
+Don't worry just close the file and if you want to modify it do it from platformio project
 
-- Humidity Sensor
-- CO2 sensor
-- Temperature sensor
-- Servo responsible for closing/opening window depending on the setted values of temperature
-- LoRaWAN antena to transmit data to a web application
+1. Start VSCode and press the *PlatformIO* icon on the left.
 
-## Installation
-```sh
-git clone https://github.com/GluhaiaMuha/SEP4IoTDevice.git --recursive
-```
+2. Select blue button *Pick a folder*
 
-## Plugins
+3. Select target folder (SEP4IoTDevice/target)
 
-| Plugin | README |
-| ------ | ------ |
-| FreeRTOS | [FreeRTOS/README.md][PlDb] |
-| Drivers | [drivers/README.md][PlGh] |
-| Front-End | [Front-End][P1Fe] |
-| Back-End/Cloud | [Back-End/Cloud][P1Be] |
+4. Now you should wait until the 'initializing platform io' is done.
+    There should be '.pio' folder visible at that point
+
+5. Go back to the root folder (SEP4IoTDevice)
+
+6. Now you should wait until VSC configures the project
+
+7. Click on the play button at the bottom. Play button is marked on the below image.
+
+![Screenshot 2023-05-18 210037](https://github.com/GluhaiaMuha/SEP4IoTDevice/assets/66741324/9c420f9e-7227-4dd6-bdd6-b628d890ab0c)
 
 
+8. At this point there should be Tests visible with status OK or FAILED in OUTPUT terminal (image below).
 
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/ihavn/VIA_FreeRTOS_AVRMEGA/blob/5bf0993e13bd63bfdbb774712925a25cfc65a427/readme.md>
-   [PlGh]: <https://github.com/ihavn/IoT_Semester_project/blob/b4d082f58bf6ec7edca1c6618e1d9f300d6da03e/README.md>
-   [P1Fe]: <https://github.com/nanami4yokai/SEP4_front_end>
-   [P1Be]: <https://github.com/MartinHvizdak/TerraSense_Cloud> 
-  
+![Screenshot 2023-05-18 210934](https://github.com/GluhaiaMuha/SEP4IoTDevice/assets/66741324/ffefc27d-29d9-4631-9634-0474bcbb9e29)

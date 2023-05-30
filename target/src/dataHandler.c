@@ -10,16 +10,13 @@
 #include <stdint.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
-
-#include "../Headers/dataHandler.h"
+#include <dataHandler.h>
 
 static int16_t dataHandlerTemperature;
 static int16_t dataHandlerHumidity;
 static int16_t dataHandlerAvgTemperature;
 static uint16_t dataHandlerCo2;
-
-static struct ServoLimits servoLimits;
-SemaphoreHandle_t xLimitsSemaphorMutex;
+static struct ServoLimits limit;
 
 
 
@@ -71,45 +68,14 @@ uint16_t dataHandler_getCo2Data()
 }
 
 struct ServoLimits dataHandler_getLimits(){
-	if (xLimitsSemaphorMutex != NULL)
-	{
-		BaseType_t isFree = xSemaphoreTake(xLimitsSemaphorMutex, (TickType_t)10);
-		
-		if (isFree == pdTRUE)
-		{
-			xSemaphoreGive(xLimitsSemaphorMutex);
-		}
-	}
-	
-	return servoLimits;
+	struct ServoLimits tempServoLimits;
+    tempServoLimits.minTempLimit = limit.minTempLimit;
+    tempServoLimits.maxTempLimit = limit.maxTempLimit;
+    
+    return tempServoLimits;
 }
 
-void dataHandler_setTempLimits(int16_t minTempLimit, int16_t maxTempLimit){
-	
-	if (xLimitsSemaphorMutex != NULL)
-	{
-		BaseType_t isFree = xSemaphoreTake(xLimitsSemaphorMutex, (TickType_t)10);
-		
-		if (isFree == pdTRUE)
-		{
-			servoLimits.minTempLimit = minTempLimit;
-			servoLimits.maxTempLimit = maxTempLimit;
-			xSemaphoreGive(xLimitsSemaphorMutex);
-		}
-	}
+void dataHandler_setTempLimits(int16_t minTemp, int16_t maxTemp){
+	limit.minTempLimit = minTemp;
+	limit.maxTempLimit = maxTemp;
 }
-
-void dataHandler_createSemaphoreAndMutexes(){
-	if (xLimitsSemaphorMutex == NULL)
-	{
-		xLimitsSemaphorMutex = xSemaphoreCreateMutex();
-		
-		if (xLimitsSemaphorMutex != NULL)
-		{
-			xSemaphoreGive(xLimitsSemaphorMutex);
-		}
-	}
-		
-}
-
-
