@@ -5,8 +5,8 @@ firmware.*
 test_result.xml
 /build
 /Debug
-/FreeRTOS
-/drivers
+/target/drivers
+/target/free-rtos
 .vscode
 .devcontainer
 .vs
