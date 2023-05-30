@@ -1,0 +1,8 @@
+service_name: travis-ci
+repo_token: AHdCgHnGIbuePsQWyGliA1K4nLZ2Zt8X4
+
+exclude:
+  - "target/lib/drivers/*"
+  - "target/lib/FreeRTOS/*"
+  - "test/src/FreeRTOS_defs/*"
+  - "build/*"
