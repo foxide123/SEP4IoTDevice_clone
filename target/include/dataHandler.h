@@ -1,11 +1,3 @@
-
-/*
- * dataHandler.h
- *
- * Created: 5/1/2023 9:43:08 PM
- *  Author: Marius
- */ 
-
 #pragma once
 #include "stdint.h"
 
@@ -27,7 +19,4 @@ void dataHandler_setCo2(uint16_t sensorCo2);
 uint16_t dataHandler_getCo2Data();
 
 struct ServoLimits dataHandler_getLimits();
-void dataHandler_setTempLimits(int16_t minTempLimit, int16_t maxTempLimit);
-
-void dataHandler_createSemaphoreAndMutexes();
-
+void dataHandler_setTempLimits(int16_t minTemp, int16_t maxTemp);

@@ -1,11 +1,3 @@
-
-/*
- * servo.c
- *
- * Created: 5/21/2023 9:07:26 PM
- *  Author: Marius
- */ 
-
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -13,8 +5,8 @@
 #include <task.h>
 #include <rc_servo.h>
 
-#include "../Headers/servo.h"
-#include "../Headers/dataHandler.h"
+#include <servo.h>
+#include <dataHandler.h>
 
 
 static int8_t position;
@@ -41,12 +33,15 @@ void servo_turnOn()
 	rc_servo_setPosition(servoNo, position);
 	printf("Servo is turned on!\n");
 	
-	
+	/*
 	struct ServoLimits limits = dataHandler_getLimits();
 	int16_t minTempLimit = limits.minTempLimit;
 	int16_t maxTempLimit = limits.maxTempLimit;
 	
 	printf("Limits: %d %d\n", minTempLimit, maxTempLimit);
+	
+	For testing purpose, everything works
+	*/
 }
 void servo_turnOff()
 {
@@ -57,7 +52,7 @@ void servo_turnOff()
 
 
 
-static limitResult servo_compareTemperatureData(int16_t temperature, int16_t minLimit, int16_t maxLimit)
+limitResult servo_compareTemperatureData(int16_t temperature, int16_t minLimit, int16_t maxLimit)
 {
 	limitResult result;
 	if (temperature >= minLimit && temperature <= maxLimit)
