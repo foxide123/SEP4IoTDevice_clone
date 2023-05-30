@@ -1,3 +1,4 @@
+
 /*
  * temperature.c
  *
@@ -14,7 +15,7 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 
-#include <temperature.h>
+#include "../Headers/temperature.h"
 #include "hih8120.h"
 
 //Buffer for storing sensor data for temperature_getAvgTemperature(); method
@@ -22,10 +23,6 @@
 
 int16_t readings[BUFFER_SIZE];
 
-TickType_t xLastWakeTime;
-TickType_t xFrequency1;
-TickType_t xFrequency2;
-TickType_t xFrequency3;
 
 void temperature_create(){
 	hih8120_driverReturnCode_t result = hih8120_initialise();
@@ -151,21 +148,24 @@ int16_t get_maximum_value(int16_t readings[BUFFER_SIZE])
 }
 
 
-void temperature_task_init(){
+
+
+void temperature_task(void* pvParameters){
+	// Remove compiler warnings
+	(void)pvParameters;
+	
+	TickType_t xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
-	xFrequency1 = 1/portTICK_PERIOD_MS; // 1 ms
-	xFrequency2 = 50/portTICK_PERIOD_MS; // 50 ms
-	xFrequency3 = 30000/portTICK_PERIOD_MS; // 30000 ms
+	const TickType_t xFrequency1 = 1/portTICK_PERIOD_MS; // 1 ms
+	const TickType_t xFrequency2 = 50/portTICK_PERIOD_MS; // 50 ms
+	const TickType_t xFrequency3 = 30000/portTICK_PERIOD_MS; // 30000 ms
 
-	temperature_create();
-}
-
-void temperature_task_run(TickType_t* xLastWakeTime, TickType_t xFrequency1,TickType_t xFrequency2,TickType_t xFrequency3){
-	printf("Temperature/Humidity Task started\n");
+	for (;;)
+	{
+		printf("Temperature/Humidity Task started\n");
 		
 		temperature_wakeup();
 		vTaskDelay(xFrequency2);
-		
 		
 		temperature_measure();
 		vTaskDelay(xFrequency1);
@@ -176,16 +176,5 @@ void temperature_task_run(TickType_t* xLastWakeTime, TickType_t xFrequency1,Tick
 		
 		//wait 30 seconds for next measurement
 		xTaskDelayUntil(&xLastWakeTime, xFrequency3);
-}
-
-void temperature_task(void* pvParameters){
-	// Remove compiler warnings
-	(void)pvParameters;
-	
-	temperature_task_init();
-
-	for (;;)
-	{		
-		temperature_task_run(&xLastWakeTime, xFrequency1, xFrequency2, xFrequency3);
 	}
 }
